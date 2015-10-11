@@ -1,0 +1,9 @@
+{
+    "name": "mean_todo",
+    "script": "./bin/www",
+    "exec_mode": "cluster",
+    "instances": 0,
+    "watch": true,
+    "ignore_watch": ["node_modules"],
+    "max_memory_restart": "100M"
+}
