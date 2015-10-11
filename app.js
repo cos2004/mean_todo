@@ -11,19 +11,14 @@ var restful = require('./routes/api');
 
 var app = express();
 
-// view engine setup
-// 
 template.config('base', '');
 template.config('extname', '.html');
 app.engine('.html', template.__express);
 app.set('view engine', 'html');
 
-
 app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
