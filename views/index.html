@@ -2,20 +2,30 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>{{title}}</title>
+   <title><?title?></title>
    <link rel="stylesheet" href="/static/css/todos.css">
-</head>
-<body>
-    <div id="todoapp">
-       <header>
-         <h1>Todos</h1>
-         <input id="new-todo" type="text" placeholder="What needs to be done?">
-       </header>
+   <script src="/static/js/angular.js"></script>
 
-       <section id="main" style="display: none;">
-         <input id="toggle-all" type="checkbox">
+</head>
+<body ng-app="TODO">
+    <div id="todoapp">
+       <header ng-controller="InputCtrl">
+         <h1>Todos</h1>
+         <input id="new-todo" type="text" placeholder="What needs to be done?" ng-keydown="onKeydown($event)">
+       </header>
+       <section id="main" ng-controller="TodoListCtrl">
+         <input id="toggle-all" type="checkbox" ng-click="onToggle($event)" ng-checked="toggleALl">
          <label for="toggle-all">Mark all as complete</label>
-         <ul id="todo-list"></ul>
+         <ul id="todo-list">
+            <li ng-class="{done: one.done == 1}" ng-dblclick="onEdit($event)" ng-repeat="one in list">
+             <div class="view">
+               <input ng-click="onOneDone($event, one.id, $index)" class="toggle" type="checkbox" ng-checked="one.done">
+               <label>{{one.text}}</label>
+               <a class="destroy" ng-click="del($event, one.id, $index)"></a>
+             </div>
+             <input class="edit" type="text" value="{{one.text}}" ng-keydown="onSubmitEdit($event, one.id, $index)" ng-blur="onBlurEdit($event)">
+            </li>
+         </ul>
        </section>
 
        <footer style="display: none;">
@@ -26,36 +36,9 @@
     </div>
 
     <div id="instructions">
-    Double-click to edit a todo.
+    Double-click to edit a todo. <a href="https://github.com/cos2004/mean_todo" target="_blank">view source</a>
     </div>
-    
-    <script src="/static/js/json2.js"></script>
+   
     <script src="/static/js/app.js"></script>
-<!-- 
-  <script src="./Backbone.js Todos_files/json2.js"></script>
-  <script src="./Backbone.js Todos_files/jquery.js"></script>
-  <script src="./Backbone.js Todos_files/underscore.js"></script>
-  <script src="./Backbone.js Todos_files/backbone.js"></script>
-  <script src="./Backbone.js Todos_files/backbone.localStorage.js"></script>
-  <script src="./Backbone.js Todos_files/todos.js"></script>
- -->
-  <!-- Templates -->
-
-  <script type="text/template" id="item-template">
-    <div class="view">
-      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-      <label><%- title %></label>
-      <a class="destroy"></a>
-    </div>
-    <input class="edit" type="text" value="<%- title %>" />
-  </script>
-
-  <script type="text/template" id="stats-template">
-    <% if (done) { %>
-      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
-    <% } %>
-    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
-  </script>
-
 </body>
 </html>

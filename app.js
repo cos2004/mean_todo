@@ -12,6 +12,8 @@ var restful = require('./routes/api');
 var app = express();
 
 template.config('base', '');
+template.config('openTag', '<?');
+template.config('closeTag', '?>');
 template.config('extname', '.html');
 app.engine('.html', template.__express);
 app.set('view engine', 'html');

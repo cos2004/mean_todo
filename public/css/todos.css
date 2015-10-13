@@ -57,9 +57,7 @@ body {
 	font-style: italic;
 }
 
-#main {
-	display: none;
-}
+
 
 #todo-list {
 	margin: 10px 0;
@@ -91,7 +89,7 @@ body {
 	cursor: pointer;
 	width: 20px;
 	height: 20px;
-	background: url(destroy.png) no-repeat;
+	background: url('./destroy.png') no-repeat;
 }
 
 #todo-list li:hover .destroy {

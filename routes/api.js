@@ -1,38 +1,21 @@
 var express = require('express');
 var router = express.Router();
+var controller = require('../controller');
 
 // 列表数据
-router.get('/list', function(req, res, next) {
-   res.send({
-      code: 1,
-      name: 'list'
-   });
-
-});
+router.get('/list', controller.list);
 
 // 修改
-router.get('/mod', function(req, res, next) {
-   res.send({
-      code: 1,
-      name: 'mod'
-   });
-});
+router.get('/mod', controller.mod);
 
 // 增加
-router.get('/add', function(req, res, next) {
-   res.send({
-      code: 1,
-      name: 'add'
-   });
-});
+router.get('/add', controller.add);
 
 // 删除
-router.get('/del', function(req, res, next) {
-   res.send({
-      code: 1,
-      name: 'del'
-   });
-});
+router.get('/del', controller.del);
+
+// 标记已完成
+router.get('/done', controller.done);
 
 
 module.exports = router;
