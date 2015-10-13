@@ -6,7 +6,7 @@ console.log('app init');
  * @author cos2004@126.com
  */
 
-var app = angular.module('TODO', []);
+var app = angular.module('TODO', []),list;
 
 //List controller
 app.controller('TodoListCtrl', ['$scope', '$http', function($scope, $http) {
@@ -14,7 +14,7 @@ app.controller('TodoListCtrl', ['$scope', '$http', function($scope, $http) {
    // get list
    $http.get('/api/list').success(function(data) {
       if (data && data.code == 1) {
-         $scope.list = data.data;
+         list = $scope.list = data.data;
          var sum = 0;
          $scope.list.forEach(function(val) {
             if (val.done == 1) {
@@ -154,7 +154,7 @@ app.controller('InputCtrl', ['$scope', '$http', function($scope, $http) {
       if (e.keyCode === 13) {
          $http.get('/api/add?text='+target.value).success(function(data) {
             if (data && data.data) {
-               $scope.list.push(data.data);
+               list.push(data.data);
                target.value = '';
             } else {
                alert('添加失败');
